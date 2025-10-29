@@ -33,7 +33,7 @@ export const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
-            <Button size="lg" className="gap-2 text-lg px-8 py-6">
+            <Button size="lg" className="gap-2 text-lg px-8 py-6" onClick={() => window.location.href = '/auth'}>
               Start Free Trial
               <ArrowRight className="h-5 w-5" />
             </Button>
