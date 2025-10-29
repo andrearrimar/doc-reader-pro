@@ -58,7 +58,7 @@ export default function Onboarding() {
       .single()
       .then(({ data: profile }) => {
         if (profile?.onboarding_completed) {
-          navigate('/dashboard');
+          // Don't auto-redirect, let user navigate freely
         } else if (profile?.onboarding_step) {
           setCurrentStep(profile.onboarding_step);
         }
@@ -193,6 +193,16 @@ export default function Onboarding() {
 
         <Card>
           <CardContent className="pt-6">
+            <div className="flex justify-end mb-4">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate('/')}
+                className="text-muted-foreground"
+              >
+                Skip for now
+              </Button>
+            </div>
             {currentStep === 1 && (
               <Step1CompanyInfo data={data} updateData={updateData} />
             )}

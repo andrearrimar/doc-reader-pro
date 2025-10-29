@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setSession(session);
         setUser(session?.user ?? null);
         
-        // Handle auth events with setTimeout to prevent deadlock
+        // Only redirect on sign in/out events, not on every auth state change
         if (event === 'SIGNED_IN' && session?.user) {
           setTimeout(() => {
             // Check if onboarding is completed
