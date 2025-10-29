@@ -14,16 +14,197 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      analytics_connections: {
+        Row: {
+          access_token: string | null
+          api_key: string | null
+          api_secret: string | null
+          company_id: string
+          created_at: string
+          id: string
+          last_sync_at: string | null
+          project_id: string | null
+          refresh_token: string | null
+          status: Database["public"]["Enums"]["connection_status"]
+          sync_error: string | null
+          token_expires_at: string | null
+          tool: Database["public"]["Enums"]["analytics_tool"]
+          updated_at: string
+          workspace_id: string | null
+        }
+        Insert: {
+          access_token?: string | null
+          api_key?: string | null
+          api_secret?: string | null
+          company_id: string
+          created_at?: string
+          id?: string
+          last_sync_at?: string | null
+          project_id?: string | null
+          refresh_token?: string | null
+          status?: Database["public"]["Enums"]["connection_status"]
+          sync_error?: string | null
+          token_expires_at?: string | null
+          tool: Database["public"]["Enums"]["analytics_tool"]
+          updated_at?: string
+          workspace_id?: string | null
+        }
+        Update: {
+          access_token?: string | null
+          api_key?: string | null
+          api_secret?: string | null
+          company_id?: string
+          created_at?: string
+          id?: string
+          last_sync_at?: string | null
+          project_id?: string | null
+          refresh_token?: string | null
+          status?: Database["public"]["Enums"]["connection_status"]
+          sync_error?: string | null
+          token_expires_at?: string | null
+          tool?: Database["public"]["Enums"]["analytics_tool"]
+          updated_at?: string
+          workspace_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "analytics_connections_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      companies: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          size: Database["public"]["Enums"]["company_size"]
+          updated_at: string
+          vertical: Database["public"]["Enums"]["company_vertical"]
+          website: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          size: Database["public"]["Enums"]["company_size"]
+          updated_at?: string
+          vertical: Database["public"]["Enums"]["company_vertical"]
+          website?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          size?: Database["public"]["Enums"]["company_size"]
+          updated_at?: string
+          vertical?: Database["public"]["Enums"]["company_vertical"]
+          website?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          company_id: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          job_title: string | null
+          onboarding_completed: boolean
+          onboarding_step: number
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          company_id?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          job_title?: string | null
+          onboarding_completed?: boolean
+          onboarding_step?: number
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          company_id?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          job_title?: string | null
+          onboarding_completed?: boolean
+          onboarding_step?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      analytics_tool:
+        | "amplitude"
+        | "mixpanel"
+        | "google_analytics"
+        | "segment"
+        | "heap"
+        | "posthog"
+      app_role: "admin" | "user"
+      company_size: "startup" | "small" | "medium" | "large" | "enterprise"
+      company_vertical:
+        | "saas"
+        | "fintech"
+        | "ecommerce"
+        | "healthtech"
+        | "edtech"
+        | "martech"
+        | "hrtech"
+        | "proptech"
+        | "other"
+      connection_status: "pending" | "connected" | "failed" | "disconnected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +331,29 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      analytics_tool: [
+        "amplitude",
+        "mixpanel",
+        "google_analytics",
+        "segment",
+        "heap",
+        "posthog",
+      ],
+      app_role: ["admin", "user"],
+      company_size: ["startup", "small", "medium", "large", "enterprise"],
+      company_vertical: [
+        "saas",
+        "fintech",
+        "ecommerce",
+        "healthtech",
+        "edtech",
+        "martech",
+        "hrtech",
+        "proptech",
+        "other",
+      ],
+      connection_status: ["pending", "connected", "failed", "disconnected"],
+    },
   },
 } as const
