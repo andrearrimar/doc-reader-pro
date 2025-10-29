@@ -37,8 +37,8 @@ export const Hero = () => {
               Start Free Trial
               <ArrowRight className="h-5 w-5" />
             </Button>
-            <Button size="lg" variant="outline" className="gap-2 text-lg px-8 py-6">
-              Watch Demo
+            <Button size="lg" variant="outline" className="gap-2 text-lg px-8 py-6" onClick={() => window.location.href = '/demo'}>
+              View Demo
             </Button>
           </div>
 
