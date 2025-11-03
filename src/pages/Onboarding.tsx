@@ -146,8 +146,9 @@ export default function Onboarding() {
 
       toast.success('Welcome to Prioris! 🎉');
       navigate('/dashboard');
-    } catch (error: any) {
-      toast.error(error.message || 'Failed to complete onboarding');
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to complete onboarding';
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
