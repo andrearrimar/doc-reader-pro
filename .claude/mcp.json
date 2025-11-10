@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "makafeli-n-8-n-workflow-builder": {
+      "transport": "http",
+      "url": "https://server.smithery.ai/@makafeli/n8n-workflow-builder/mcp"
+    }
+  }
+}
